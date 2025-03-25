@@ -2,7 +2,7 @@ import os
 import gdown
 
 CHECKPOINT_PATH = "work_dir/MedSAM/medsam_vit_b.pth"
-GDRIVE_FILE_ID = "1ETWmi4AiniJeWOt6HAsYgTjYv_fkgzoN"
+GDRIVE_FILE_ID = "1UAmWL88roYR7wKlnApw5Bcuzf2iQgk6_"
 
 def download_checkpoint():
     """Download checkpoint if not found."""
