@@ -96,7 +96,7 @@ parser.add_argument(
     default='[95, 255, 190, 350]',
     help="bounding box of the segmentation target",
 )
-parser.add_argument("--device", type=str, default="cuda:0", help="device")
+parser.add_argument("--device", type=str, default="cpu", help="device")
 parser.add_argument(
     "-chk",
     "--checkpoint",
