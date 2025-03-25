@@ -1,10 +1,6 @@
 import os
 import gdown
 
-from .MedSAM_Inference import medsam_inference
-
-__all__ = ["medsam_inference"]
-
 CHECKPOINT_PATH = "work_dir/MedSAM/medsam_vit_b.pth"
 GDRIVE_FILE_ID = "1ETWmi4AiniJeWOt6HAsYgTjYv_fkgzoN"
 
@@ -18,3 +14,7 @@ def download_checkpoint():
         print("Download complete.")
 
 download_checkpoint()
+
+from .MedSAM_Inference import medsam_inference
+
+__all__ = ["medsam_inference"]
