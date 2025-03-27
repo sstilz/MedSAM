@@ -15,6 +15,6 @@ def download_checkpoint():
 
 download_checkpoint()
 
-from .MedSAM_Inference import medsam_inference
+from .MedSAM_Inference import medsam_inference, show_mask, show_box, preprocess, visualize_results
 
-__all__ = ["medsam_inference"]
+__all__ = ["medsam_inference", "show_mask", "show_box", "preprocess", "visualize_results"]

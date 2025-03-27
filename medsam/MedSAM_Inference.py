@@ -72,12 +72,7 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
     medsam_seg = (low_res_pred > 0.5).astype(np.uint8)
     return medsam_seg
 
-def preprocess(img_path, box: str):
-    img_np = io.imread(img_path)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    medsam_model = sam_model_registry["vit_b"](checkpoint=CHECKPOINT_PATH)
-    medsam_model = medsam_model.to(device)
-    medsam_model.eval()
+def preprocess(medsam_model, img_np, box, device):
     if len(img_np.shape) == 2:
         img_3c = np.repeat(img_np[:, :, None], 3, axis=-1)
     else:
@@ -100,7 +95,7 @@ def preprocess(img_path, box: str):
     box_1024 = box_np / np.array([W, H, W, H]) * 1024
     with torch.no_grad():
         image_embedding = medsam_model.image_encoder(img_1024_tensor)  # (1, 256, 64, 64)
-    return medsam_model, image_embedding, box_1024, H, W, img_3c, box_np
+    return image_embedding, box_1024, H, W, img_3c, box_np
 
 def visualize_results(img_3c, box_np, medsam_seg):
     # %% visualize results
