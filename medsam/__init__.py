@@ -1,7 +1,7 @@
 import os
 import gdown
 
-CHECKPOINT_PATH = "work_dir/MedSAM/medsam_vit_b.pth"
+CHECKPOINT_PATH = "/workspace/data/medsam_vit_b.pth"
 GDRIVE_FILE_ID = "1UAmWL88roYR7wKlnApw5Bcuzf2iQgk6_"
 
 def download_checkpoint():
