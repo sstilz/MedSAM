@@ -13,12 +13,9 @@ import os
 
 join = os.path.join
 import torch
-from segment_anything import sam_model_registry
 from skimage import io, transform
 import torch.nn.functional as F
 import argparse
-
-CHECKPOINT_PATH = "work_dir/MedSAM/medsam_vit_b.pth"
 
 # visualization functions
 # source: https://github.com/facebookresearch/segment-anything/blob/main/notebooks/predictor_example.ipynb
@@ -73,6 +70,14 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
     return medsam_seg
 
 def preprocess(medsam_model, img_np, box, device):
+    """ 
+    `medsam_model` should have already been loaded to the specified device.
+    This function moves `img_1024_tensor` to the same device as `medsam_model`.
+    
+    Returns:
+        image_embedding: This came from the img_1024 tensor, so it should
+            also be on the same device as `medsam_model`.
+    """
     if len(img_np.shape) == 2:
         img_3c = np.repeat(img_np[:, :, None], 3, axis=-1)
     else:
