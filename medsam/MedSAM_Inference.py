@@ -40,6 +40,7 @@ def show_box(box, ax):
 
 @torch.no_grad()
 def medsam_inference(medsam_model, img_embed, box_1024, H, W):
+    """ Returns the raw logits and predictions."""
     box_torch = torch.as_tensor(box_1024, dtype=torch.float, device=img_embed.device)
     if len(box_torch.shape) == 2:
         box_torch = box_torch[:, None, :]  # (B, 1, 4)
@@ -67,7 +68,7 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
     )  # (1, 1, gt.shape)
     low_res_pred = low_res_pred.squeeze().cpu().numpy()  # (256, 256)
     medsam_seg = (low_res_pred > 0.5).astype(np.uint8)
-    return medsam_seg
+    return low_res_logits, medsam_seg
 
 def preprocess(medsam_model, img_np, box, device):
     """ 
